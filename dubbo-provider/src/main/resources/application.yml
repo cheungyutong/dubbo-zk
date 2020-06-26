@@ -1,0 +1,49 @@
+spring:
+  application:
+    name: dubbo-provider
+#可以使用${}表达式去引入
+user:
+  service:
+    version: 1.0.0
+
+dubbo:
+  #扫描duubo的注解，此处是@Service的注解
+  scan:
+    basePackages: com.cheungyutong.service
+  #dubbo config
+  application:
+    id: dubbo-provider
+    name: dubbo-provider
+    qos-port: 22222
+    qos-enable: true
+  #protocl config
+  protocol:
+    id: dubbo
+    name: dubbo
+    port: 12345
+    status: server
+  #registry config
+  registry:
+    id: zookeeper
+    #如果是集群zookeeper://39.106.151.228:2181?backup=39.106.151.228:2181,39.106.151.228:2181
+    address: zookeeper://39.106.151.228:2181
+#dubbo状态检查
+management:
+  endpoint:
+    dubbo:
+      enabled: true
+    dubbo-shutdown:
+      enabled: true
+    dubbo-configs:
+      enabled: true
+    dubbo-services:
+      enabled: true
+    dubbo-references:
+      enabled: true
+    dubbo-properties:
+      enabled: true
+  health:
+    dubbo:
+      status:
+        defaults: memory
+        extras: load,threadpool
